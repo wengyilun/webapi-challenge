@@ -12,8 +12,8 @@ server.use(express.json())
 server.use(helmet())
 server.use(morgan())
 
-server.use('/api/action', actionRoute)
-server.use('/api/project', projectRoute)
+server.use('/api/actions', actionRoute)
+server.use('/api/projects', projectRoute)
 
 server.get('/', (req, res) => {
 	res.status(200).send('Weclome to project server')

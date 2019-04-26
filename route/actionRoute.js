@@ -1,9 +1,15 @@
 const express = require('express')
+const db = require('../data/helpers/actionModel')
 
 const router = express.Router()
 
 router.get('/', async (req, res) =>{
-
+	try{
+		const list = await  db.get()
+		res.status(200).send(list)
+	}catch(err){
+		res.status(500).send({error: "Error retrieving list"})
+	}
 })
 
 router.post('/', async (req, res) =>{
