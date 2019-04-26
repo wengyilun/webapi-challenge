@@ -55,8 +55,14 @@ router.delete('/:id', async (req, res) =>{
 	}
 })
 
-router.get('/:id/acitons', async (req, res) =>{
-
+router.get('/:id/actions', async (req, res) =>{
+	db.getProjectActions(req.params.id)
+	.then( messages => {
+		res.status(200).json(messages)
+	})
+	.catch(err =>{
+		res.status(500).json(err)
+	})
 })
 
 module.exports = router
