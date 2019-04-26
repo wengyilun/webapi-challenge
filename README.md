@@ -25,14 +25,21 @@ In this challenge, create a web API around the following resources: `Projects` a
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
 - [ ] Mention two parts of Express that you learned about this week.
+It provides chaining of middlewares
+It abstract out NodeJs's complexity and made it easier to call NodeJS C++ features from JS runtime
 
 - [ ] Describe Middleware?
+Middleware is library that were designed to be extensible and can be used to intercept incoming request and respond with message or error, pass alone that information
+to the next middleware in the chain or return error to the last errorHandling middleware.
 
 - [ ] Describe a Resource?
+Resource are assets of any file types that are stored and served up by the server and can be accessed via API endpoints which are url locations on the internet.
 
 - [ ] What can the API return to help clients know if a request was successful?
+If it's a GET request, it can return a status code of 200. If it's a POST request, it can return a status code of 201 to indicate the request being handled successfully without error.
 
 - [ ] How can we partition our application into sub-applications?
+We can use express' Router component to return as a middleware with which express library can consume. 
 
 ## Project Setup
 
