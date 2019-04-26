@@ -13,9 +13,16 @@ router.get('/', async (req, res) =>{
 })
 
 router.post('/', async (req, res) =>{
-
+	try{
+		if( !req.body.project_id || !req.body.description ||  !req.body.notes){
+			res.status(401).send({message: "Project id and description fields cannot be blank"})
+		}
+		const item = await db.insert(req.body)
+		res.status(201).send(item)
+	}catch(err){
+		res.status(500).send({error: "Error adding action"})
+	}
 })
-
 router.put('/:id', async (req, res) =>{
 
 })
