@@ -26,11 +26,33 @@ router.post('/', async (req, res) =>{
 })
 
 router.put('/:id', async (req, res) =>{
-
+	try{
+		if(req.body && !req.body.name || req.body && !req.body.description){
+			res.status(401).send({message: "Name and description fields cannot be blank"})
+		}
+		const item = await db.update(req.params.id, req.body)
+		if(item){
+			res.status(201).send(item)
+		}else{
+			res.status(404).send({message: "Project with that id cannot be found"})
+		}
+	}catch(err){
+		res.status(500).send({error: "Error updating project"})
+	}
 })
 
 router.delete('/:id', async (req, res) =>{
-
+	try {
+		const count = await db.remove(req.params.id)
+		if (count > 0) {
+			res.status(200).json({ message: 'The Project has been deleted' });
+		} else {
+			res.status(404).json({ message: "Project with that id cannot be found"})
+		}
+	} catch (error) {
+		console.log(error);
+		 res.status(500).send({error: "Error deleting project"})
+	}
 })
 
 router.get('/:id/acitons', async (req, res) =>{
