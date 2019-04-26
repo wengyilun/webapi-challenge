@@ -17,8 +17,13 @@ router.post('/', async (req, res) =>{
 		if( !req.body.project_id || !req.body.description ||  !req.body.notes){
 			res.status(401).send({message: "Project id and description fields cannot be blank"})
 		}
+		
 		const item = await db.insert(req.body)
-		res.status(201).send(item)
+		if(item){
+			res.status(201).send(item)
+		}else{
+			res.status(404).send({message: "Project with that id cannot be found"})
+		}
 	}catch(err){
 		res.status(500).send({error: "Error adding action"})
 	}
